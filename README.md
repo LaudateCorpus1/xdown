@@ -64,4 +64,3 @@ python3 xdown.py URL -O output_folder NB_PAGES_TO_SCAN
 
 ## Requirements
 - requests
-- wget
