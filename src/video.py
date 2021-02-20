@@ -1,4 +1,5 @@
 import os
+import requests
 from lib import status
 from lib import color
 
@@ -25,9 +26,11 @@ def download(video, url, PATH):
     try:
         print("%s Output directory: '%s%s%s'" % (status.get("info"), color.get("purple", 1), PATH, color.get("reset")))
         print("%s Downloading '%s%s%s'" % (status.get("working"), color.get("purple", 1), out, color.get("reset")))
-        os.system("wget -O %s/%s '%s' -q" % (PATH, out, video))
+        data = requests.get(video)
+        open("%s/%s" % (PATH, out), "wb").write(data.content)
         print("%s Downloaded '%s%s%s'" % (status.get("ok"), color.get("purple", 1), out, color.get("reset")))
         return (0)
-    except:
+    except Exception as error:
         print("%s Download failed" % status.get("error"))
+        print(error)
         return (-1)
